@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         NoBaiduNews
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  屏蔽百度主页新闻推荐流，只保留网址导航功能。
 // @author       WLong
 // @license      MIT
@@ -17,14 +17,14 @@
     //window.addEventListener('load', function(){
         var int = self.setInterval(function() {
             //debugger;
+            if (document.getElementById("s_content_2")) {
+                document.getElementById("s_content_2").remove();
+            }
             document.getElementById("s_menu_mine").click();
             if (document.getElementById("s_content_100")) {
                 document.getElementById('s_menus_wrapper').innerHTML = '<span id="s_menu_mine" class="s-menu-item current" data-id="100"><span class="s-menu-item-underline"></span></span>';
-                //document.getElementById('s_content_2').remove();
                 window.clearInterval(int);
             }
-        },1000);
+        },100);
     //})
 })();
-
-
