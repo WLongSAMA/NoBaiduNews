@@ -7,8 +7,8 @@
 脚本若失效，请联系1010841065@qq.com
 
 ### 截图预览
-![桌面版截图](./blob/main/screenshot1.jpg)
-![移动版截图](./blob/main/screenshot2.jpg)
+![桌面版截图](https://raw.githubusercontent.com/WLongSAMA/NoBaiduNews/main/screenshot1.jpg)
+![移动版截图](https://raw.githubusercontent.com/WLongSAMA/NoBaiduNews/main/screenshot2.jpg)
 
 ### 兼容性说明
 此脚本在 Windows 平台下使用 Edge, Chrome, Firefox 等浏览器安装 Tampermonkey 扩展测试可用，其他浏览器和其他油猴扩展暂未测试。\
