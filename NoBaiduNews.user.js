@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         NoBaiduNews
 // @namespace    https://github.com/WLongSAMA/NoBaiduNews
-// @version      0.3
+// @version      0.4
 // @description  屏蔽百度主页新闻推荐流，只保留网址导航功能。
 // @author       WLong
 // @license      MIT
 // @match        *://www.baidu.com
+// @match        *://m.baidu.com
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
 // @supportURL   https://github.com/WLongSAMA/NoBaiduNews
@@ -15,6 +16,7 @@
     'use strict';
 
     //window.addEventListener('load', function(){
+    var n = 0;
     var int = self.setInterval(function () {
         //debugger;
         if (document.title == "百度一下") { //移动端
@@ -29,11 +31,14 @@
             document.getElementById("ts-image-uploader-icon").style.display = "none"; //隐藏不可用的图片搜索按钮
 
             document.getElementById("navs").remove(); //移除列表分隔行
-            //暂时不支持响应式改变高度
-            document.getElementById("header").style.height = document.documentElement.clientHeight - document.getElementById("bottom").clientHeight - 10 + "px"; //修复卡片高度
+            document.getElementById("logo").style.paddingTop = "150px"; //优化LOGO和搜索框的显示位置
+            window.addEventListener("resize", function () {
+                document.getElementById("header").style.height = document.documentElement.clientHeight - document.getElementById("bottom").clientHeight - 10 + "px"; //修复卡片高度
+            }, false);
+            window.dispatchEvent(new Event('resize'));
             window.clearInterval(int);
-
         } else { //桌面端
+            if (n >= 200) window.clearInterval(int);
             if (document.getElementById("s_content_2")) {
                 document.getElementById("s_content_2").remove();
             }
@@ -42,6 +47,7 @@
                 document.getElementById('s_menus_wrapper').innerHTML = '<span id="s_menu_mine" class="s-menu-item current" data-id="100"><span class="s-menu-item-underline"></span></span>';
                 window.clearInterval(int);
             }
+            n++;
         }
     }, 100);
     //})
