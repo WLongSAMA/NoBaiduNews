@@ -11,6 +11,8 @@
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
 // @supportURL   https://github.com/WLongSAMA/NoBaiduNews
+// @downloadURL https://update.greasyfork.org/scripts/458079/NoBaiduNews.user.js
+// @updateURL https://update.greasyfork.org/scripts/458079/NoBaiduNews.meta.js
 // ==/UserScript==
 
 (function () {
@@ -53,6 +55,11 @@
             n++;
         } else if (document.title == "必应" || document.title == "Bing") { //必应
             if (n >= 200) window.clearInterval(int);
+
+            document.getElementsByClassName("vs")[0].style.display = "none"; //隐藏新闻流
+            document.getElementsByClassName("scroll_cont show_all_onerowup")[0].style.top = "calc(100% - 3.25rem)"; //调整悬浮窗位置
+            document.getElementById("sb_feedback").style.display = "none"; //隐藏反馈按钮
+
             var place = document.getElementsByClassName("sb_form_placeholder_query");
             if (place.length > 0) {
                 place[0].style.display = "none"; //隐藏搜索框热词
@@ -62,13 +69,4 @@
             window.clearInterval(int);
         }
     }, 100);
-
-    window.addEventListener('load', function () {
-        if (document.title == "必应" || document.title == "Bing") { //必应
-            document.getElementsByClassName("vs")[0].style.display = "none"; //隐藏新闻流
-            document.getElementsByClassName("scroll_cont show_all_onerowup")[0].style.top = "calc(100% - 3.25rem)"; //调整悬浮窗位置
-            document.getElementById("sb_feedback").style.display = "none"; //隐藏反馈按钮
-            window.clearInterval(int);
-        }
-    })
 })();
