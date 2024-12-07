@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         NoBaiduNews
 // @namespace    https://github.com/WLongSAMA/NoBaiduNews
-// @version      0.5
+// @version      0.5.1
 // @description  屏蔽百度和必应主页新闻推荐流，只保留网址导航功能。
 // @author       WLong
 // @license      MIT
@@ -53,7 +53,7 @@
                 window.clearInterval(int);
             }
             n++;
-        } else if (document.title == "必应" || document.title == "Bing") { //必应
+        } else if (document.title == "搜索 - Microsoft 必应" || document.title == "Search - Microsoft Bing") { //必应
             if (n >= 200) window.clearInterval(int);
 
             document.getElementsByClassName("vs")[0].style.display = "none"; //隐藏新闻流
