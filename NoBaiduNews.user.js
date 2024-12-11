@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         NoBaiduNews
 // @namespace    https://github.com/WLongSAMA/NoBaiduNews
-// @version      0.5.1
+// @version      0.5.2
 // @description  屏蔽百度和必应主页新闻推荐流，只保留网址导航功能。
 // @author       WLong
 // @license      MIT
@@ -43,7 +43,7 @@
             window.dispatchEvent(new Event('resize'));
             window.clearInterval(int);
         } else if (document.title == "百度一下，你就知道") { //百度桌面端
-            if (n >= 200) window.clearInterval(int);
+            if (n >= 100) window.clearInterval(int);
             if (document.getElementById("s_content_2")) {
                 document.getElementById("s_content_2").remove();
             }
@@ -54,10 +54,11 @@
             }
             n++;
         } else if (document.title == "搜索 - Microsoft 必应" || document.title == "Search - Microsoft Bing") { //必应
-            if (n >= 200) window.clearInterval(int);
+            if (n >= 100) window.clearInterval(int);
 
             document.getElementsByClassName("vs")[0].style.display = "none"; //隐藏新闻流
-            document.getElementsByClassName("scroll_cont show_all_onerowup")[0].style.top = "calc(100% - 3.25rem)"; //调整悬浮窗位置
+            document.getElementsByClassName("caro_div")[0].style.display = "none"; //隐藏布局按钮
+            document.getElementsByClassName("scroll_cont show_partial")[0].style.top = "calc(100% - 3.25rem)"; //调整悬浮窗位置
             document.getElementById("sb_feedback").style.display = "none"; //隐藏反馈按钮
 
             var place = document.getElementsByClassName("sb_form_placeholder_query");
@@ -68,5 +69,5 @@
         } else {
             window.clearInterval(int);
         }
-    }, 100);
+    }, 500);
 })();
