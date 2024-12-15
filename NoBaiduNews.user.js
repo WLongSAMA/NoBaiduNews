@@ -56,10 +56,14 @@
         } else if (document.title == "搜索 - Microsoft 必应" || document.title == "Search - Microsoft Bing") { //必应
             if (n >= 100) window.clearInterval(int);
 
+            document.getElementById("id_qrcode").style.display = "none"; //隐藏必应手机版图标
+            document.getElementById("id_qrcode_popup_positioner").style.display = "none"; //隐藏必应手机版二维码
             document.getElementsByClassName("vs")[0].style.display = "none"; //隐藏新闻流
             document.getElementsByClassName("caro_div")[0].style.display = "none"; //隐藏布局按钮
             document.getElementsByClassName("scroll_cont show_partial")[0].style.top = "calc(100% - 3.25rem)"; //调整悬浮窗位置
             document.getElementById("sb_feedback").style.display = "none"; //隐藏反馈按钮
+
+            document.getElementById("footer").style.display = "none"; //隐藏页脚
 
             var place = document.getElementsByClassName("sb_form_placeholder_query");
             if (place.length > 0) {
@@ -69,5 +73,5 @@
         } else {
             window.clearInterval(int);
         }
-    }, 500);
+    }, 1000);
 })();
