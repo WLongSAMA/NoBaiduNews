@@ -35,10 +35,11 @@
         return document.querySelectorAll(selector);
     }
 
-    addEventListener("load", (event) => {
-        let n = 0;
-        let interval;
-        if (!IsMobile()) {
+    let n = 0;
+    let interval;
+
+    if (!IsMobile()) {
+        addEventListener("load", (event) => {
             if (document.title == "百度一下，你就知道") { //百度桌面端
                 interval = self.setInterval(function () {
                     if (n >= 10) window.clearInterval(interval);
@@ -55,8 +56,10 @@
                     n++;
                 }, 1000);
             }
-        } else {
-            if (document.title == "百度一下") { //百度移动端
+        });
+    } else {
+        if (document.title == "百度一下") { //百度移动端
+            interval = self.setInterval(function () { //百度移动端无法触发 Load 事件
                 Selector(".blank-frame").remove(); //移除新闻流
                 Selector("#foot").firstChild.remove(); //移除用户反馈
                 Selector("#ns-square-point").style.display = "none"; //隐藏右上角小红点
@@ -70,11 +73,15 @@
                     Selector("#header").style.height = document.documentElement.clientHeight - Selector("#bottom").clientHeight - 10 + "px"; //修复卡片高度
                 }, false);
                 window.dispatchEvent(new Event('resize'));
-            }
-        }
 
-        //必应已经可以通过菜单关闭新闻流
-        /*
+                window.clearInterval(interval);
+            }, 1000);
+        }
+    }
+
+    //必应已经可以通过菜单关闭新闻流
+    /*
+    addEventListener("load", (event) => {
         if (document.title == "搜索 - Microsoft 必应" || document.title == "Search - Microsoft Bing") { //必应
             let qrcode = Selector("#id_qrcode");
             if (qrcode) {
@@ -112,6 +119,6 @@
                 }
             }
         }
-        */
     });
+    */
 })();
